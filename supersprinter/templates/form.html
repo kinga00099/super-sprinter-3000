@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% if  not id %}
+                Add User Story | Super Sprinter 300
+            {% else %}
+                Update User Story | Super Sprinter 3000
+            {% endif %}
+        </title>
+    </head>
+
+    <body>
+    <h1>
+        {% if  not id %}
+            Add User Story
+        {% else %}
+            Update User story
+        {% endif %}
+    </h1>
+
+    {% if  not id %}
+        <form action ="/story" method ="POST">          <!-- POST method to be able to change input data, not needed on main page -->
+    {% else %}
+        <form action ="/story/{{ id }}" method ="POST">
+    {% endif %}
+
+        <p><label for="title">Story Title</label> <br>              <!-- labels over the input boxes-->
+        <input name = "Story title" rows="1" cols="60" value="{{ list_of_stories[id][1] if id else '' }}"></p>      <!-- single row is a requirement so using input-->
+        <br>
+
+         <p><label for="story">User Story</label> <br>
+             <textarea name = "User story" rows="3" cols="80">{{ list_of_stories[id][2] if id else '' }}</textarea></p>  <!-- multiple lines with textarea-->
+        <br>
+
+        <p><label for="criteria">Acceptance Criteria</label> <br>
+            <textarea name = "Acceptance criteria" rows="5" cols="80">{{ list_of_stories[id][3] if id else '' }}</textarea></p>
+        <br>
+
+        <p><label for="value">Business Value</label> <br>
+        <input name="Business value" type="number" min="100" max="1500" step="100" value="{{ list_of_stories[id][4] if id else '1000' }}"></pr>  <!-- min,max,dividable is a requirement -->
+        <br>
+
+        <p><label for="estim">Estimation time (h)</label> <br>
+        <input name="Estimation" type="number" min="0.5" max="40" step="0.5" value="{{ list_of_stories[id][5] if id else '0.5'}}"></p>  <!-- min,max,dividable is a requirement -->
+        <br>
+
+        <p><label for="status">Status</label> <br>
+        <select name ="Status" >
+            <option {{ "selected" if id and list_of_stories[id][6] == 'Planning' else '' }}>Planning</option>           <!-- status selection with option-->
+            <option {{ "selected" if id and list_of_stories[id][6] == 'TODO' else '' }}>Todo</option>
+            <option {{ "selected" if id and list_of_stories[id][6] == 'In Progress' else '' }}>In Progress</option>
+            <option {{ "selected" if id and list_of_stories[id][6] == 'Review' else '' }}>Review</option>
+            <option {{ "selected" if id and list_of_stories[id][6] == 'Done' else '' }}>Done</option>
+        </select><br>
+
+        <br>
+        <br>
+        <button type="submit">{{ "Update" if id else "Create"}}</button>   <!-- button: update if existing story, else create-->
+    </form>
+</body>
+</html>

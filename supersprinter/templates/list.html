@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Welcome! | Super Sprinter 3000</title>           <!-- name of the page -->
+    </head>
+    <body>
+
+        <h1><strong>Super Sprinter 300</strong></h1>        <!-- strong: fat fonts -->
+        <h4><a href="/story">Add new user story</a></h4>        <!-- link to add a new user story page -->
+
+        <table>                         <!-- html table which contains the data-->
+            <tr>                                <!-- tr: table row-->
+                <th><strong>ID</th>                 <!-- th: table headers-->
+                <th><strong>Story Title</th>
+                <th><strong>User Story</th>
+                <th><strong>Acceptance Criteria</th>
+                <th><strong>Business Value</th>
+                <th><strong>Estimation</th>
+                <th><strong>Status</th>
+            </tr>
+
+                {% for id in range(0, len_of_list_of_stories) %}
+                    <tr>
+                        <td>{{ list_of_stories[id][0]}}</td>        <!-- td: table data -->
+                        <td><a href="/story/{{ list_of_stories[id][0]}}">   <!-- link to the story -->
+                            {{ list_of_stories[id][1]}}</a></td>
+                        <td width="30%">{{ list_of_stories[id][2]}}</td>
+                        <td>{{ list_of_stories[id][3]}}</td>
+                        <td>{{ list_of_stories[id][4]}} point</td>      <!-- print "point" after the given value-->
+                        <td>{{ list_of_stories[id][5]}} h</td>          <!-- print "h" after the given value-->
+                        <td>{{ list_of_stories[id][6]}}</td>
+                    </tr>
+                {% endfor %}
+            </tr>
+        </table>
+    </body>
+</html>
